@@ -11,15 +11,15 @@ import kotlinx.coroutines.flow.map
 class TaskRepositoryImpl(
     private val taskDao: TaskDao
 ): TaskRepository {
-    override fun insertTask(task: Task) {
+    override suspend fun insertTask(task: Task) {
         taskDao.insertTask(task.toTaskEntity())
     }
 
-    override fun deleteTask(task: Task) {
+    override suspend fun deleteTask(task: Task) {
         taskDao.deleteTask(task.toTaskEntity())
     }
 
-    override fun getTasks(): Flow<List<Task>> {
+    override suspend fun getTasks(): Flow<List<Task>> {
         return taskDao.getTasks().map { tasks ->
             tasks.map { task ->
                 task.toTask()

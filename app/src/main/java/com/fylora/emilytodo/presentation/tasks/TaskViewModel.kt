@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fylora.emilytodo.domain.model.Task
 import com.fylora.emilytodo.domain.repository.TaskRepository
-import dagger.hilt.InstallIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -27,21 +26,25 @@ class TaskViewModel @Inject constructor(
     }
 
     fun onEvent(event: TaskEvent) {
-        when (event) {
-            TaskEvent.OnCreateTask ->
-                taskRepository.insertTask(
-                    task = Task(
-                        title = _taskState.value.title,
-                        timestamp = LocalDateTime.now(),
-                        isCompleted = false
+        viewModelScope.launch {
+            when (event) {
+                TaskEvent.OnCreateTask -> {
+                    taskRepository.insertTask(
+                        task = Task(
+                            title = _taskState.value.title,
+                            timestamp = LocalDateTime.now(),
+                            isCompleted = false
+                        )
                     )
-                )
-            is TaskEvent.OnDeleteTask ->
-                taskRepository.deleteTask(event.task)
-            is TaskEvent.OnTitleChange ->
-                _taskState.value = taskState.value.copy(title = event.title)
-            is TaskEvent.OnUpdateTask ->
-                taskRepository.insertTask(event.task)
+                    _taskState.value = taskState.value.copy(title = "")
+                }
+                is TaskEvent.OnDeleteTask ->
+                    taskRepository.deleteTask(event.task)
+                is TaskEvent.OnTitleChange ->
+                    _taskState.value = taskState.value.copy(title = event.title)
+                is TaskEvent.OnUpdateTask ->
+                    taskRepository.insertTask(event.task)
+            }
         }
     }
 }

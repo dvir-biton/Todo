@@ -81,6 +81,7 @@ dependencies {
 
     implementation(libs.androidx.viewmodel)
     implementation(libs.androidx.navigation)
+    implementation(libs.dagger.hilt.fragment)
 
     implementation(libs.dagger.hilt.navigation)
 }
