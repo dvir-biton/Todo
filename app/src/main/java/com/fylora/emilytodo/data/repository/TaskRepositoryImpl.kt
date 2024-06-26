@@ -15,8 +15,8 @@ class TaskRepositoryImpl(
         taskDao.insertTask(task.toTaskEntity())
     }
 
-    override fun deleteTask(id: Int) {
-        taskDao.deleteTask(id)
+    override fun deleteTask(task: Task) {
+        taskDao.deleteTask(task.toTaskEntity())
     }
 
     override fun getTasks(): Flow<List<Task>> {

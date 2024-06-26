@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
@@ -74,7 +74,13 @@ dependencies {
     ksp(libs.dagger.hilt.compiler)
 
     implementation(libs.androidx.room)
+    implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
     coreLibraryDesugaring(libs.date.time)
+
+    implementation(libs.androidx.viewmodel)
+    implementation(libs.androidx.navigation)
+
+    implementation(libs.dagger.hilt.navigation)
 }

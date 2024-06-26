@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface TaskRepository {
     fun insertTask(task: Task)
 
-    fun deleteTask(id: Int)
+    fun deleteTask(task: Task)
 
     fun getTasks(): Flow<List<Task>>
 }

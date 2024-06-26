@@ -6,5 +6,5 @@ data class Task(
     val title : String,
     val timestamp: LocalDateTime,
     val isCompleted: Boolean,
-    val id: Int
+    val id: Int = 0
 )
