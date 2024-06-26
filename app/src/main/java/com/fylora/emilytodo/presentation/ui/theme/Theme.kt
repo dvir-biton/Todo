@@ -1,4 +1,4 @@
-package com.fylora.emilytodo.ui.theme
+package com.fylora.emilytodo.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

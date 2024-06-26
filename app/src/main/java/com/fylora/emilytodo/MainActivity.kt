@@ -6,11 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.fylora.emilytodo.domain.model.Task
-import com.fylora.emilytodo.ui.theme.EmilyTodoTheme
-import java.time.LocalDateTime
+import com.fylora.emilytodo.presentation.ui.theme.EmilyTodoTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
