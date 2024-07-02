@@ -12,13 +12,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fylora.emilytodo.domain.model.Task
@@ -37,9 +37,10 @@ fun TaskComponent(
             .border(
                 width = 2.dp,
                 color = if (task.isCompleted) Color.Green
-                    else Color.DarkGray,
+                else MaterialTheme.colorScheme.tertiary,
                 shape = RoundedCornerShape(12.dp)
-            ).clickable {
+            )
+            .clickable {
                 onCompleteChange(!task.isCompleted)
             }
     ) {
@@ -60,8 +61,6 @@ fun TaskComponent(
                 text = task.title,
                 fontSize = 16.sp,
                 modifier = Modifier.weight(0.8f),
-                textDecoration = if (task.isCompleted) TextDecoration.LineThrough
-                    else TextDecoration.None,
             )
             Icon(
                 imageVector = Icons.Default.Delete,

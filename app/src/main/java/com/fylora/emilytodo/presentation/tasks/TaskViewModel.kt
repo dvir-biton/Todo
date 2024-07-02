@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.fylora.emilytodo.domain.model.Task
 import com.fylora.emilytodo.domain.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -16,6 +18,9 @@ class TaskViewModel @Inject constructor(
 ): ViewModel() {
     private val _taskState = mutableStateOf(TaskState())
     val taskState = _taskState
+
+    private val _snackbar = Channel<String>()
+    val snackbar = _snackbar.receiveAsFlow()
 
     init {
         viewModelScope.launch {
@@ -29,6 +34,11 @@ class TaskViewModel @Inject constructor(
         viewModelScope.launch {
             when (event) {
                 TaskEvent.OnCreateTask -> {
+                    if (taskState.value.title.isBlank()) {
+                        _snackbar.send("Task title cannot be blank")
+                        return@launch
+                    }
+
                     taskRepository.insertTask(
                         task = Task(
                             title = _taskState.value.title,
